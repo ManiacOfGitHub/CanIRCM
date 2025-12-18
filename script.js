@@ -1,5 +1,6 @@
 document.getElementById("form").style.display = "block";
-document.getElementById("form").addEventListener("submit",()=>{
+document.getElementById("form").addEventListener("submit",(event)=>{
+    event.preventDefault();
     var serial = document.getElementById("serial").value.toUpperCase();
     var safeSerial = escape(serial); // I mean... the user inputted it themselves, but idk we might as well.
 
