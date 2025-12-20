@@ -1,17 +1,17 @@
 document.getElementById("form").style.display = "block";
 document.getElementById("form").addEventListener("submit",(event)=>{
     event.preventDefault();
-    var serial = document.getElementById("serial").value.toUpperCase();
+    var serial = document.getElementById("serial").value.toUpperCase().replaceAll(" ","");
     var safeSerial = escape(serial); // I mean... the user inputted it themselves, but idk we might as well.
 
     var result = checkSerial(serial);
     var outputs = {
-        mariko: `Serial ${safeSerial} seems to be a "mariko" Switch or Switch Lite.\nThese are currently not hackable via software, only hardware modifications that involve soldering modchips.`,
+        mariko: `Serial ${safeSerial} seems to be a "mariko" Switch or Switch Lite.\nThese are currently not hackable via software, only hardware modifications that involve soldering modchips. You can find a list of hardmodders trusted by the community <a href="https://nintendohomebrew.com/hardmodders">here</a>.`,
         switch2: `Serial ${safeSerial} seems to be a Switch 2. These are currently not hackable.`,
-        maybe: `Serial ${safeSerial} <i>might</i> be patched. The only way you can know this for sure is by pushing the payload manually. You can find instructions to do so <a href="https://switch.hacks.guide/user_guide/rcm/sending_payload/">here</a>.`,
-        patched: `Serial ${safeSerial} is patched.`,
-        unpatched: `Serial ${safeSerial} is not patched.`,
-        invalid: `This serial is invalid.`
+        maybe: `Serial ${safeSerial} <i>might</i> be patched. The only way you can know this for sure is by pushing the payload manually. You can find instructions to do so <a href="https://switch.hacks.guide/user_guide/rcm/sending_payload.html">here</a>.`,
+        patched: `Serial ${safeSerial} is patched. It is not hackable via software, only hardware modifications that involve soldering modchips. You can find a list of hardmodders trusted by the community <a href="https://nintendohomebrew.com/hardmodders">here</a>.`,
+        unpatched: `Serial ${safeSerial} is not patched. <a href="https://switch.hacks.guide/user_guide/rcm/sending_payload.html">Continue to the written guide</a>.`,
+        invalid: `This serial is invalid. Please make sure you typed it correctly. If you did, <a href="https://github.com/ManiacOfGitHub/CanIRCM/issues/new">make an issue on the GitHub repo</a>.`
     };
     var finalOutput = outputs[result];
     if(result == "unpatched") {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-100">
+<html lang="en" class="h-100" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" crossorigin="anonymous">
 </head>
 <body class="d-flex flex-column h-100">
-    <div class="flex-shrink-0 ">
+    <div class="flex-shrink-0">
         <div class="container">
+            <a href="https://github.com/ManiacOfGitHub/CanIRCM" style="position: absolute; top: 0.5em; right: 0.5em"><img src="github-mark-white.svg" style="height:2em;" alt="Repo"></a>
             <h1 class="text-center pt-2">Can I RCM?</h1>
             <hr>
             <noscript>
@@ -18,18 +19,12 @@
                     </div>
                 </div>
             </noscript>
-            <form id="form" style="display: none;" action="javascript:void(0);">
-                <div class="row align-items-center">
-                    <div class="col-auto">
-                        <label for="serial" class="col-form-label">Serial:</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="text" class="form-control" id="serial">
-                    </div>
-                    <div class="col-auto">
-                        <input type="submit" class="btn btn-primary" id="submit" value="Check">
-                    </div>
-                </div>
+            <form id="form" style="display: none;" action="javascript:void(0);" class="text-center">
+                <label for="serial" class="col-form-label fw-bold">Serial:</label>
+                <br>
+                <input type="text" class="form-control text-center m-auto w-50" id="serial">
+                <br>
+                <input type="submit" class="btn btn-primary" id="submit" value="Check">
             </form>
             <div id="output" style="display: none;">
                 <hr>
@@ -37,13 +32,7 @@
             </div>
         </div>
     </div>
-    <footer class="footer mt-auto py-3 bg-body-tertiary">
-        <div class="text-center">
-            Yes, I'm aware that all consoles can enter RCM, so this site should be called "Can I fusee-gelee?" but that doesn't roll off the tongue, you know?<br>
-            Made by <a href="https://github.com/ManiacOfGitHub">ManiacOfGitHub</a>.<br>
-            This tool is heavily (and I mean heavily) based on the <code>.ssnc</code> command from the Discord bot <a href="https://github.com/nh-server/Kurisu/blob/main/cogs/ssnc.py#L45">Kurisu</a>.<br>
-            Credit to Nintendo Homebrew for doing most of the hard work.
-        </div>
+    <footer class="footer mt-auto py-3 bg-body-tertiary text-center">
     </footer>
     <script src="script.js"></script>
 </body>
