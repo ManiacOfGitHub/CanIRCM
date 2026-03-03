@@ -43,13 +43,13 @@ function checkSerial(serial) {
 
     var maxSafe = {
         "W": {
-            1: {unpatched: 1007400, maybe: 1012000},
+            1: {unpatched: 1006500, maybe: 1012000},
             4: {unpatched: 4001100, maybe: 4001200},
             7: {unpatched: 7001780, maybe: 7003000}
         },
         "J": {
             1: {unpatched: 1002000, maybe: 1003000},
-            4: {unpatched: 4004600, maybe: 4006000},
+            4: {unpatched: 4004400, maybe: 4006000},
             7: {unpatched: 7004000, maybe: 7005000}
         }
     }
