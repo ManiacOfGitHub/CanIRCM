@@ -10,7 +10,7 @@ document.getElementById("form").addEventListener("submit",(event)=>{
         maybe: `<i>might</i> be patched. The only way you can know this for sure is by pushing the payload manually. You can find instructions to do so <a href="https://switch.hacks.guide/user_guide/rcm/sending_payload.html">here</a>.`,
         patched: `is patched. It is not hackable via software, only hardware modifications that involve soldering modchips. You can find a list of hardmodders trusted by the community <a href="https://nintendohomebrew.com/hardmodders">here</a>.`,
         unpatched: `is not patched. <a href="https://switch.hacks.guide/user_guide/rcm/sending_payload.html">Continue to the written guide</a>.`,
-        invalid: `is invalid. Please make sure you typed it correctly. If you did, <a href="https://github.com/ManiacOfGitHub/CanIRCM/issues/new">make an issue on the GitHub repo</a>.`
+        invalid: `is invalid. Please make sure you typed it correctly.`
     };
     var finalOutput = outputs[result];
     if(result == "unpatched") {
