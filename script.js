@@ -78,7 +78,7 @@ function checkSerial(serial) {
 
 function checkSerialButReallyStupid(serial) {
     // 3DS goes first before the other nonsense.
-    if(serial.match("[CESRAPYQN](?:JE|JF|JH|JM|W|B|S|EE|EF|EH|EM|AF|AH|AG|AM|KF|KH|KM|CF|CH|CM)[0-9]{9}")) {
+    if(serial.match(/^[CESRAPYQN](?:JE|JF|JH|JM|W|B|S|EE|EF|EH|EM|AF|AH|AG|AM|KF|KH|KM|CF|CH|CM)[0-9]{9}$/)) {
         document.getElementById("serialOutput").innerText = serial;
         document.getElementById("outputMessage").innerHTML = `is a console within the Nintendo 3DS family of systems. Did you know it's surprisingly easy to mod?<br><br><p class="text-center"><a href="https://3ds.hacks.guide"><img style="max-width: 100%;" src="img/3ds.jpeg"></a></p>`;
         document.getElementById("output").style.display = "block";
