@@ -1,9 +1,18 @@
-document.getElementById("form").style.display = "block";
-document.getElementById("form").addEventListener("submit",(event)=>{
+var serialData;
+(async()=>{
+    try {
+        serialData = await (await fetch("https://nintendohomebrew.com/assets/switch_serial_data.json")).json();
+        document.getElementById("form").style.display = "block";
+    } catch(err) {
+        document.getElementById("outputMessage").innerHTML = "Failed to load serial data. Please reload the page.";
+        document.getElementById("output").style.display = "block";
+    }
+})();
+document.getElementById("form").addEventListener("submit",async(event)=>{
     event.preventDefault();
     var serial = document.getElementById("serial").value.toUpperCase().replaceAll(" ","");
 
-    var result = checkSerial(serial);
+    var result = await checkSerial(serial);
     if(!result) return;
     var outputs = {
         mariko: `seems to be a "mariko" Switch, Switch Lite, or Switch OLED.\nThese are currently not hackable via software, only hardware modifications that involve soldering modchips.<br><br>You can find a list of hardmodders trusted by the community <a href="https://nintendohomebrew.com/hardmodders">here</a>. When requesting their services, please make sure to specify your console model (Switch v2, Switch OLED, Switch Lite) after reviewing the diagram below:`,
@@ -26,18 +35,18 @@ document.getElementById("form").addEventListener("submit",(event)=>{
     document.getElementById("output").style.display = "block";
 })
 
-function checkSerial(serial) {
+async function checkSerial(serial) {
     document.getElementById("modelTable").style.display = "none";
     if(serial.length != 14) {
         var stupidCheck = checkSerialButReallyStupid(serial);
         if(stupidCheck) return;
         return "invalid";
     }
-    if(!serial.match("XA[JKW][1479][0-9]{6}")) {
-        if(serial.match("X[KJWT][JWCE][0-9]{7}")) {
+    if(!serial.match(serialData.regex.valid)) {
+        if(serial.match(serialData.regex.mariko)) {
             document.getElementById("modelTable").style.display = "block";
             return "mariko";
-        } else if(serial.match("HA[JKWE][0-9]{7}")) {
+        } else if(serial.match(serialData.regex.switch2)) {
             return "switch2";
         } else {
             var stupidCheck = checkSerialButReallyStupid(serial);
@@ -46,30 +55,17 @@ function checkSerial(serial) {
         }
     }
 
-    var region = serial[2];
-    var assemblyLine = parseInt(serial[3]);
     var checkingValue = parseInt(serial.slice(3,10));
-
-    var maxSafe = {
-        "W": {
-            1: {unpatched: 1006500, maybe: 1012000},
-            4: {unpatched: 4001100, maybe: 4001300},
-            7: {unpatched: 7001750, maybe: 7003000}
-        },
-        "J": {
-            1: {unpatched: 1002000, maybe: 1003000},
-            4: {unpatched: 4004400, maybe: 4008300},
-            7: {unpatched: 7004000, maybe: 7005000}
+    for(var prefix in serialData.prefixes) {
+        if(serial.startsWith(prefix)) {
+            if(checkingValue < serialData.prefixes[prefix].unpatched) {
+                return "unpatched";
+            } else if(checkingValue < serialData.prefixes[prefix].maybe) {
+                return "maybe";
+            } else {
+                return "patched";
+            }
         }
-    }
-    if(region == "K") return "maybe";
-    if(assemblyLine == 9) return "maybe";
-    if(checkingValue < maxSafe[region][assemblyLine].unpatched) {
-        return "unpatched";
-    } else if(checkingValue < maxSafe[region][assemblyLine].maybe) {
-        return "maybe";
-    } else {
-        return "patched";
     }
 }
 
