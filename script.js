@@ -4,7 +4,8 @@ var serialData;
         serialData = await (await fetch("https://nintendohomebrew.com/assets/switch_serial_data.json")).json();
         document.getElementById("form").style.display = "block";
     } catch(err) {
-        document.getElementById("outputMessage").innerHTML = "Failed to load serial data. Please reload the page.";
+        document.getElementById("outputAlert").innerHTML = "Failed to load serial data. Please reload the page.";
+        document.getElementById("outputAlert").classList = "alert alert-danger";
         document.getElementById("output").style.display = "block";
     }
 })();
